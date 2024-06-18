@@ -31,11 +31,11 @@ public class Main {
     private static void draw() {
     	System.out.println("|:---------------------------------------------------------------------------------------:|");
     	System.out.println("| Cheque n0182 | Comp | Banco | Agencia | C1 |  Conta  |   | Cheque N | C3 | R$           |");
-    	System.out.println("|              | 018  |  777  |   0444  | 02 | 6780913 | A |   0182   | 00 | "/*VALOR*/     );
+    	System.out.println("|              | 018  |  777  |   0444  | 02 | 6780913 | A |   0182   | 00 | "+floatInput   );
     	System.out.println("|              |                                                                          |");
-    	System.out.println("|              | Pago por este cheque a quantia de "/*VALOR POR EXTENSO*/                   );
+    	System.out.println("|              | Pago por este cheque a quantia de "+finalString                            );
     	System.out.println("|              | a " /*NOME PESSOA*/+ "ou a sua ordem"                                      );
-    	System.out.println("|              | BANCO                  Blumenau" /*DIA*/+" de "/*MES*/+" de"/*ANO*/        );
+    	System.out.println("|              | BANCO                  Blumenau, " /*DIA*/+" de "/*MES*/+" de"/*ANO*/      );
     	System.out.println("|              | AGENCIA                                       "/*ASSINATURA*/              );
     	System.out.println("|              |                                                       ASSINATURA         |");
     	System.out.println("|:---------------------------------------------------------------------------------------:|");
@@ -354,9 +354,6 @@ public class Main {
 
         System.out.println("Digite seu nome completo: ");
         String nome = scanner.nextLine();
-
-        //Fazer validação
-
     }
     
 
