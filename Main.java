@@ -373,7 +373,6 @@ public class Main {
       System.out.println("Erro! Digite um nome válido.");
       return name();
     }
-
     return nome;
   }
 
