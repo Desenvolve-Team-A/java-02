@@ -350,7 +350,15 @@ public class Main {
     }
 
     private static void name() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Digite seu nome completo: ");
+        String nome = scanner.nextLine();
+
+        //Fazer validação
+
     }
+    
 
     private static void date() {
     }
