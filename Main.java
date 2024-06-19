@@ -35,7 +35,7 @@ public class Main {
     System.out.println("|              | 018  |  777  |   0444  | 02 | 6780913 | A |   0182   | 00 |              |");
     System.out.println("|              | Pago por este                                                            |");
     System.out.println("|              | cheque a quantia de                                                      |");
-    System.out.println("|              | a                                                         ou à sua ordem |");
+    System.out.println("|              | a                                                         ou a sua ordem |");
     System.out.println("|              | BANCO                          Blumenau,                                 |");
     System.out.println("|              | AGENCIA                                                                  |");
     System.out.println("|              |                                            ASSINATURA                    |");
@@ -50,7 +50,7 @@ public class Main {
     String linha3 = "|              | 018  |  777  |   0444  | 02 | 6780913 | A |   0182   | 00 |              |";
     String linha4 = "|              | Pago por este                                                            |";
     String linha5 = String.format("|              | cheque a quantia de %-52s |", extenso);
-    String linha6 = String.format("|              | a %-55s ou à sua ordem |", nome);
+    String linha6 = String.format("|              | a %-55s ou a sua ordem |", nome);
     String linha7 = String.format("|              | BANCO                          Blumenau, %-32s|", data);
     String linha8 = "|              | AGENCIA                                                                  |";
     String linha9 = String.format("|              |                                            ASSINATURA %-19s|",
@@ -405,7 +405,7 @@ public class Main {
     System.out.println("Digite seu nome completo: ");
     String nome = scanner.nextLine().trim();
 
-    if (nome.matches("[a-zA-ZÀ-áéíóúÁÉÍÓÚâêîôûÂÊÎÔÛãõÃÕ]+") || nome.split("\\s+").length < 2 || nome.length() > 55) {
+    if (!nome.matches("[a-zA-Z ?]+") || nome.split("\\s+").length < 2 || nome.length() > 55) {
       System.out.println("Erro! Digite um nome valido.");
       return name();
     }
