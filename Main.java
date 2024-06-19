@@ -25,6 +25,7 @@ public class Main {
     data = date();
     assinatura = sign(nome);
     drawComplete(nome, extenso, data, assinatura, valor);
+    System.exit(0);
   }
 
   private static void draw() {
@@ -36,7 +37,7 @@ public class Main {
     System.out.println("|              | cheque a quantia de                                                      |");
     System.out.println("|              | a                                                         ou à sua ordem |");
     System.out.println("|              | BANCO                          Blumenau,                                 |");
-    System.out.println("|              | AGÊNCIA                                                                  |");
+    System.out.println("|              | AGENCIA                                                                  |");
     System.out.println("|              |                                            ASSINATURA                    |");
     System.out.println("|:---------------------------------------------------------------------------------------:|");
   }
@@ -51,7 +52,7 @@ public class Main {
     String linha5 = String.format("|              | cheque a quantia de %-52s |", extenso);
     String linha6 = String.format("|              | a %-55s ou à sua ordem |", nome);
     String linha7 = String.format("|              | BANCO                          Blumenau, %-32s|", data);
-    String linha8 = "|              | AGÊNCIA                                                                  |";
+    String linha8 = "|              | AGENCIA                                                                  |";
     String linha9 = String.format("|              |                                            ASSINATURA %-19s|",
         assinatura);
     String linha10 = "|:---------------------------------------------------------------------------------------:|";
@@ -404,8 +405,8 @@ public class Main {
     System.out.println("Digite seu nome completo: ");
     String nome = scanner.nextLine().trim();
 
-    if (!nome.matches("[a-zA-ZÀ-ÿ\\s'?]+") || nome.split("\\s+").length < 2 || nome.length() > 55) {
-      System.out.println("Erro! Digite um nome válido.");
+    if (nome.matches("[a-zA-ZÀ-áéíóúÁÉÍÓÚâêîôûÂÊÎÔÛãõÃÕ]+") || nome.split("\\s+").length < 2 || nome.length() > 55) {
+      System.out.println("Erro! Digite um nome valido.");
       return name();
     }
     return nome;
@@ -431,7 +432,7 @@ public class Main {
         if (year < 2000 || year > 2030) {
           System.out.println("Ano informado fora do periodo permitido! (De 2000 a 2030)");
         } else if (month < 1 || month > 12) {
-          System.out.println("Mes informado não existe, favor informe um mes entre 1 e 12");
+          System.out.println("Mes informado nao existe, favor informe um mes entre 1 e 12");
         } else {
           if (month == 2) {
             if (day < 1 || day > 28) {
