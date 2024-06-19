@@ -212,7 +212,7 @@ public class Main {
           break;
 
         case 3:
-          finalString += "três ";
+          finalString += "tres ";
           break;
 
         case 4:
@@ -255,6 +255,8 @@ public class Main {
     if (array[0] != 0 && array[1] != 0 && array[2] != 0) {
       finalString += "e ";
     } else if (array[0] != 0 && array[1] != 0 && array[2] == 0 && array[3] != 0) {
+      finalString += "e ";
+    } else if (array[0] != 0 && array[1] == 0 && array[2] == 0 && array[3] != 0) {
       finalString += "e ";
     }
 
@@ -358,7 +360,7 @@ public class Main {
           break;
 
         case 3:
-          finalString += "três ";
+          finalString += "tres ";
           break;
 
         case 4:
@@ -407,6 +409,12 @@ public class Main {
 
     if (!nome.matches("[a-zA-Z ?]+") || nome.split("\\s+").length < 2 || nome.length() > 55) {
       System.out.println("Erro! Digite um nome valido.");
+      return name();
+    }
+
+    String[] palavras = nome.split(" ");
+    if (palavras[0].length() > 18) {
+      System.out.println("Erro! Seu primeiro nome nao deve ter mais de 18 caracteres.");
       return name();
     }
     return nome;
@@ -506,6 +514,9 @@ public class Main {
 
   private static String sign(String name) {
     String[] palavras = name.split(" ");
+    if (palavras[0].length() > 15) {
+
+    }
     return palavras[0];
   }
 
