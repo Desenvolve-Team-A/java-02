@@ -46,7 +46,7 @@ public class Main {
 
     String linha1 = "|:---------------------------------------------------------------------------------------:|";
     String linha2 = String
-        .format("| Cheque n0182 | Comp | Banco | Agência | C1 |  Conta  |   | Cheque N | C3 | R$ %-9.2f |", valor);
+        .format("| Cheque n0182 | Comp | Banco | Agencia | C1 |  Conta  |   | Cheque N | C3 | R$ %-9.2f |", valor);
     String linha3 = "|              | 018  |  777  |   0444  | 02 | 6780913 | A |   0182   | 00 |              |";
     String linha4 = "|              | Pago por este                                                            |";
     String linha5 = String.format("|              | cheque a quantia de %-52s |", extenso);
