@@ -14,15 +14,17 @@ public class Main {
     float valor = 0;
     String extenso = "";
     String data = "";
+    String assinatura = "";
 
     draw();
     nome = name();
-    drawComplete(nome, extenso, data, valor);
+    drawComplete(nome, extenso, data, assinatura, valor);
     valor = entradaMontante();
     extenso = extenso(valor);
-    drawComplete(nome, extenso, data, valor);
+    drawComplete(nome, extenso, data, assinatura, valor);
     data = date();
-    drawComplete(nome, extenso, data, valor);
+    assinatura = sign(nome);
+    drawComplete(nome, extenso, data, assinatura, valor);
   }
 
   private static void draw() {
@@ -32,14 +34,14 @@ public class Main {
     System.out.println("|              | 018  |  777  |   0444  | 02 | 6780913 | A |   0182   | 00 |              |");
     System.out.println("|              | Pago por este                                                            |");
     System.out.println("|              | cheque a quantia de                                                      |");
-    System.out.println("|              | a                                                         ou a sua ordem |");
+    System.out.println("|              | a                                                         ou à sua ordem |");
     System.out.println("|              | BANCO                          Blumenau,                                 |");
-    System.out.println("|              | AGENCIA                                                                  |");
+    System.out.println("|              | AGÊNCIA                                                                  |");
     System.out.println("|              |                                            ASSINATURA                    |");
     System.out.println("|:---------------------------------------------------------------------------------------:|");
   }
 
-  private static void drawComplete(String nome, String extenso, String data, float valor) {
+  private static void drawComplete(String nome, String extenso, String data, String assinatura, float valor) {
 
     String linha1 = "|:---------------------------------------------------------------------------------------:|";
     String linha2 = String
@@ -50,7 +52,8 @@ public class Main {
     String linha6 = String.format("|              | a %-55s ou à sua ordem |", nome);
     String linha7 = String.format("|              | BANCO                          Blumenau, %-32s|", data);
     String linha8 = "|              | AGÊNCIA                                                                  |";
-    String linha9 = "|              |                                            ASSINATURA                    |";
+    String linha9 = String.format("|              |                                            ASSINATURA %-19s|",
+        assinatura);
     String linha10 = "|:---------------------------------------------------------------------------------------:|";
 
     System.out.println(linha1);
@@ -68,14 +71,23 @@ public class Main {
   private static float entradaMontante() {
 
     while (true) {
-      System.out.println("Informe um valor para o cheque que seja entre R$00.01 a R$99.99: ");
-      float floatInput = scanner.nextFloat();
+      float floatInput = 0;
+      System.out.println("Informe um valor para o cheque entre R$00,01 a R$99,99: ");
+      String input = scanner.nextLine();
+
+      if (input.matches("\\d+[\\,]?\\d*")) {
+        input = input.replace(",", ".");
+        floatInput = Float.parseFloat(input);
+
+      } else {
+        System.out.println("Valor invalido!");
+      }
 
       if (floatInput > 0.00 && floatInput < 100.00) {
         return floatInput;
       }
-    }
 
+    }
   }
 
   private static String extenso(float input) {
@@ -184,7 +196,11 @@ public class Main {
       }
     }
 
-    if (array[0] == 0 && array[1] != 0) {
+    if (array[0] != 1 && array[0] != 0 && array[1] != 0) {
+      finalString += "e ";
+    }
+
+    if (array[1] != 0) {
       switch (array[1]) {
         case 1:
           finalString += "um ";
@@ -227,10 +243,6 @@ public class Main {
       }
     }
 
-    if (array[0] != 1 && array[0] != 0 && array[1] != 0) {
-      finalString += "e ";
-    }
-
     if (array[0] == 0 && array[1] == 1) {
       finalString += "real ";
     } else if (array[0] != 0) {
@@ -240,6 +252,8 @@ public class Main {
     }
 
     if (array[0] != 0 && array[1] != 0 && array[2] != 0) {
+      finalString += "e ";
+    } else if (array[0] != 0 && array[1] != 0 && array[2] == 0 && array[3] != 0) {
       finalString += "e ";
     }
 
@@ -328,7 +342,7 @@ public class Main {
       }
     }
 
-    if (array[2] != 1 && array[3] != 0) {
+    if (array[2] != 0 && array[3] != 0) {
       finalString += "e ";
     }
 
@@ -390,7 +404,7 @@ public class Main {
     System.out.println("Digite seu nome completo: ");
     String nome = scanner.nextLine().trim();
 
-    if (!nome.matches("[a-zA-ZÀ-ÿ\\s'?]+") || nome.split("\\s+").length < 2) {
+    if (!nome.matches("[a-zA-ZÀ-ÿ\\s'?]+") || nome.split("\\s+").length < 2 || nome.length() > 55) {
       System.out.println("Erro! Digite um nome válido.");
       return name();
     }
@@ -413,7 +427,6 @@ public class Main {
         int day = Integer.parseInt(splitedInputdate[0]);
         int month = Integer.parseInt(splitedInputdate[1]);
         int year = Integer.parseInt(splitedInputdate[2]);
-
 
         if (year < 2000 || year > 2030) {
           System.out.println("Ano informado fora do periodo permitido! (De 2000 a 2030)");
@@ -488,6 +501,11 @@ public class Main {
 
     }
     return date;
+  }
+
+  private static String sign(String name) {
+    String[] palavras = name.split(" ");
+    return palavras[0];
   }
 
 }
