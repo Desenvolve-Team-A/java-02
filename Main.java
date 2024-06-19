@@ -414,6 +414,7 @@ public class Main {
         int month = Integer.parseInt(splitedInputdate[1]);
         int year = Integer.parseInt(splitedInputdate[2]);
 
+
         if (year < 2000 || year > 2030) {
           System.out.println("Ano informado fora do periodo permitido! (De 2000 a 2030)");
         } else if (month < 1 || month > 12) {
