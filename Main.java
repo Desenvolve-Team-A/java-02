@@ -23,8 +23,8 @@ public class Main {
     valor = entradaMontante();
     extenso = extenso(valor);
     drawComplete(nome, extenso, data, valor);
-    // data = date();
-    // drawComplete(nome, extenso, data, valor);
+    data = date();
+    drawComplete(nome, extenso, data, valor);
   }
 
   private static void draw() {
@@ -376,7 +376,96 @@ public class Main {
     return nome;
   }
 
-  private static void date() {
+  private static String date() {
+    Scanner scannerDate = new Scanner(System.in);
+    String date = "";
+
+    while (date == "") {
+      System.out.println("Informe a data: Ex: 00/00/0000 ");
+      String inputDate = scannerDate.nextLine();
+
+      if (!inputDate.matches("\\d{2}/\\d{2}/\\d{4}")) {
+        System.out.println("Entrada invalida, digite a data no formato indicado");
+      } else {
+        String[] splitedInputdate = inputDate.trim().split("/");
+
+        int day = Integer.parseInt(splitedInputdate[0]);
+        int month = Integer.parseInt(splitedInputdate[1]);
+        int year = Integer.parseInt(splitedInputdate[2]);
+
+        if (year < 1900 || year > 2100) {
+          System.out.println("Ano informado fora do periodo permitido! (De 1900 a 2100)");
+        } else if (month < 1 || month > 12) {
+          System.out.println("Mes informado não existe, favor informe um mes entre 1 e 12");
+        } else {
+          if (month == 2) {
+            if (day < 1 || day > 28) {
+              System.out.println("Dia informado nao existe para o mes");
+            } else {
+              date = String.valueOf(day) + " de Fevereiro de " + String.valueOf(year);
+            }
+          }
+          if (month == 4 || month == 6 || month == 9 || month == 11) {
+            if (day < 1 || day > 30) {
+              System.out.println("Dia informado nao existe para o mes");
+            } else {
+              switch (month) {
+                case 4:
+                  date = String.valueOf(day) + " de Abril de " + String.valueOf(year);
+                  break;
+                case 6:
+                  date = String.valueOf(day) + " de Junho de " + String.valueOf(year);
+                  break;
+                case 9:
+                  date = String.valueOf(day) + " de Setembro de " + String.valueOf(year);
+                  break;
+                case 11:
+                  date = String.valueOf(day) + " de Novembro de " + String.valueOf(year);
+                  break;
+
+                default:
+                  break;
+              }
+
+            }
+          }
+          if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10
+              || month == 12) {
+            if (day < 1 || day > 31) {
+              System.out.println("Dia informado nao existe para o mes");
+            } else {
+              switch (month) {
+                case 1:
+                  date = String.valueOf(day) + " de Janeiro de " + String.valueOf(year);
+                  break;
+                case 3:
+                  date = String.valueOf(day) + " de Marco de " + String.valueOf(year);
+                  break;
+                case 5:
+                  date = String.valueOf(day) + " de Maio de " + String.valueOf(year);
+                  break;
+                case 7:
+                  date = String.valueOf(day) + " de Julho de " + String.valueOf(year);
+                  break;
+                case 8:
+                  date = String.valueOf(day) + " de Agosto de " + String.valueOf(year);
+                  break;
+                case 10:
+                  date = String.valueOf(day) + " de Outubro de " + String.valueOf(year);
+                  break;
+                case 12:
+                  date = String.valueOf(day) + " de Dezembro de " + String.valueOf(year);
+                  break;
+                default:
+                  break;
+              }
+            }
+          }
+        }
+      }
+
+    }
+    return date;
   }
 
 }
