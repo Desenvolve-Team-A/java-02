@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 public class Main {
@@ -19,8 +18,8 @@ public class Main {
     draw();
     name = name();
     drawComplete(name, words, date, sign, value);
-    value = inputValue();
-    words = valueWord(value);
+    value = entradaMontante();
+    words = extenso(value);
     drawComplete(name, words, date, sign, value);
     date = date();
     sign = sign(name);
@@ -52,9 +51,9 @@ public class Main {
     String line5 = String.format("|              | cheque a quantia de %-52s |", words);
     String line6 = String.format("|              | a %-55s ou a sua ordem |", name);
     String line7 = String.format("|              | BANCO                          Blumenau, %-32s|", date);
-    String line8 = "|              | AGENCIA                                                                  |";
-    String line9 = String.format("|              |                                            ASSINATURA %-19s|",
-        sign);
+    String espaco = "|              |                                                                          |";
+    String line8 = String.format("|              | AGENCIA                                     %-29s|", sign);
+    String line9 = "|              |                                               ASSINATURA                 |";
     String line10 = "|:---------------------------------------------------------------------------------------:|";
 
     System.out.println(line1);
@@ -64,12 +63,13 @@ public class Main {
     System.out.println(line5);
     System.out.println(line6);
     System.out.println(line7);
+    System.out.println(espaco);
     System.out.println(line8);
     System.out.println(line9);
     System.out.println(line10);
   }
 
-  private static float inputValue() {
+  private static float entradaMontante() {
 
     while (true) {
       float floatInput = 0;
@@ -91,7 +91,7 @@ public class Main {
     }
   }
 
-  private static String valueWord(float input) {
+  private static String extenso(float input) {
     int i = 0;
     String inputNumber = String.format("%.2f", input);
     inputNumber = inputNumber.replace(",", "");
@@ -417,20 +417,32 @@ public class Main {
   private static String name() {
     Scanner scanner = new Scanner(System.in);
 
-    System.out.println("Digite seu nome completo: ");
+    System.out.println("Digite seu nome completo sem acentuacao: ");
     String nome = scanner.nextLine().trim();
 
-    if (!nome.matches("[a-zA-Z ?]+") || nome.split("\\s+").length < 2 || nome.length() > 55) {
+    // Validações
+    if (!nome.matches("[a-zA-Z ?]+") || nome.split(" ").length < 2 || nome.length() > 55) {
       System.out.println("Erro! Digite um nome valido.");
       return name();
     }
 
     String[] palavras = nome.split(" ");
-    if (palavras[0].length() > 18) {
-      System.out.println("Erro! Seu primeiro nome nao deve ter mais de 18 caracteres.");
+    if (palavras[0].length() > 15 || palavras[palavras.length - 1].length() > 15) {
+      System.out.println("Erro! Seu nome/sobrenome nao deve conter mais que 15 caracteres.");
       return name();
     }
-    return nome;
+
+    StringBuilder resultado = new StringBuilder();
+    for (int i = 0; i < palavras.length; i++) {
+
+      String palavra = palavras[i].toLowerCase();
+      char primeiraLetra = Character.toUpperCase(palavra.charAt(0));
+      resultado.append(primeiraLetra);
+      String restantePalavra = palavra.substring(1);
+      resultado.append(restantePalavra).append(" ");
+    }
+
+    return nome = resultado.toString().trim();
   }
 
   private static String date() {
@@ -525,12 +537,16 @@ public class Main {
     return date;
   }
 
+  // retorna o primeiro e ultimo elemento do array (primeiro e ultimo nome)
   private static String sign(String name) {
     String[] palavras = name.split(" ");
-    if (palavras[0].length() > 15) {
 
+    String primeiroNome = palavras[0];
+    String ultimoNome = palavras[palavras.length - 1];
+
+    if (ultimoNome.length() > 7) {
+      ultimoNome = ultimoNome.substring(0, 1) + ".";
     }
-    return palavras[0];
+    return primeiroNome + " " + ultimoNome;
   }
-
 }
