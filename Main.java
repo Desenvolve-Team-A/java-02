@@ -91,7 +91,8 @@ public class Main {
     }
   }
 
-  private static String extenso(float input) {
+  
+private static String extenso(float input) {
     int i = 0;
     String inputNumber = String.format("%.2f", input);
     inputNumber = inputNumber.replace(",", "");
@@ -197,11 +198,11 @@ public class Main {
       }
     }
 
-    if (array[0] != 1 && array[0] != 0 && array[1] != 0) {
+    if (array[0] > 1 &&  array[1] != 0) {
       finalString += "e ";
     }
 
-    if (array[1] != 0) {
+    if (array[0] != 1 && array[1] != 0) {
       switch (array[1]) {
         case 1:
           finalString += "um ";
@@ -251,15 +252,18 @@ public class Main {
     } else if (array[0] == 0 && array[1] != 0) {
       finalString += "reais ";
     }
+    
+    
+    if (array[0] ==0 && array[1] !=0 && array[2] != 0) {
+      finalString += "e ";
+    } else if (array[0] !=0 && array[1] ==0 && array[2] != 0) {
+      finalString += "e ";
+    } else if (array[0] !=0 && array[1] !=0 && array[2] != 0) {
+      finalString += "e ";
+    } 
 
-    if (array[0] != 0 && array[1] != 0 && array[2] != 0) {
-      finalString += "e ";
-    } else if (array[0] != 0 && array[1] != 0 && array[2] == 0 && array[3] != 0) {
-      finalString += "e ";
-    } else if (array[0] != 0 && array[1] == 0 && array[2] == 0 && array[3] != 0) {
-      finalString += "e ";
-    }
 
+ //CENTAVOS
     if (array[2] == 1) {
       switch (array[3]) {
         case 0:
@@ -345,7 +349,19 @@ public class Main {
       }
     }
 
-    if (array[2] != 0 && array[3] != 0) {
+    if (array[0] ==0 && array[1] ==0 && array[2] > 1 && array[3] != 0){
+      finalString += "e ";
+    } else if (array[0] ==0 && array[1] !=0 && array[2] ==0 && array[3] != 0){
+      finalString += "e ";
+    } else if (array[0] ==0 && array[1] !=0 && array[2] > 1 && array[3] != 0){
+      finalString += "e ";
+    } else if (array[0] !=0 && array[1] ==0 && array[2] ==0 && array[3] != 0){
+      finalString += "e ";
+    } else if (array[0] !=0 && array[1] ==0 && array[2] >1 && array[3] != 0){
+      finalString += "e ";
+    } else if (array[0] !=0 && array[1] !=0 && array[2] ==0 && array[3] != 0){
+      finalString += "e ";
+    } else if (array[0] !=0 && array[1] !=0 && array[2] > 1 && array[3] != 0){
       finalString += "e ";
     }
 
@@ -405,7 +421,8 @@ public class Main {
     Scanner scanner = new Scanner(System.in);
 
     System.out.println("Digite seu nome completo: ");
-    String nome = scanner.nextLine().trim();
+    String nome = scanner.nextLine
+    ().trim();
 
     if (!nome.matches("[a-zA-Z ?]+") || nome.split("\\s+").length < 2 || nome.length() > 55) {
       System.out.println("Erro! Digite um nome valido.");
