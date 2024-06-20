@@ -10,21 +10,21 @@ public class Main {
   }
 
   private static void menu() {
-    String nome = "";
-    float valor = 0;
-    String extenso = "";
-    String data = "";
-    String assinatura = "";
+    String name = "";
+    float value = 0;
+    String words = "";
+    String date = "";
+    String sign = "";
 
     draw();
-    nome = name();
-    drawComplete(nome, extenso, data, assinatura, valor);
-    valor = entradaMontante();
-    extenso = extenso(valor);
-    drawComplete(nome, extenso, data, assinatura, valor);
-    data = date();
-    assinatura = sign(nome);
-    drawComplete(nome, extenso, data, assinatura, valor);
+    name = name();
+    drawComplete(name, words, date, sign, value);
+    value = inputValue();
+    words = valueWord(value);
+    drawComplete(name, words, date, sign, value);
+    date = date();
+    sign = sign(name);
+    drawComplete(name, words, date, sign, value);
     System.exit(0);
   }
 
@@ -42,34 +42,34 @@ public class Main {
     System.out.println("|:---------------------------------------------------------------------------------------:|");
   }
 
-  private static void drawComplete(String nome, String extenso, String data, String assinatura, float valor) {
+  private static void drawComplete(String name, String words, String date, String sign, float value) {
 
-    String linha1 = "|:---------------------------------------------------------------------------------------:|";
-    String linha2 = String
-        .format("| Cheque n0182 | Comp | Banco | Agencia | C1 |  Conta  |   | Cheque N | C3 | R$ %-9.2f |", valor);
-    String linha3 = "|              | 018  |  777  |   0444  | 02 | 6780913 | A |   0182   | 00 |              |";
-    String linha4 = "|              | Pago por este                                                            |";
-    String linha5 = String.format("|              | cheque a quantia de %-52s |", extenso);
-    String linha6 = String.format("|              | a %-55s ou a sua ordem |", nome);
-    String linha7 = String.format("|              | BANCO                          Blumenau, %-32s|", data);
-    String linha8 = "|              | AGENCIA                                                                  |";
-    String linha9 = String.format("|              |                                            ASSINATURA %-19s|",
-        assinatura);
-    String linha10 = "|:---------------------------------------------------------------------------------------:|";
+    String line1 = "|:---------------------------------------------------------------------------------------:|";
+    String line2 = String
+        .format("| Cheque n0182 | Comp | Banco | Agencia | C1 |  Conta  |   | Cheque N | C3 | R$ %-9.2f |", value);
+    String line3 = "|              | 018  |  777  |   0444  | 02 | 6780913 | A |   0182   | 00 |              |";
+    String line4 = "|              | Pago por este                                                            |";
+    String line5 = String.format("|              | cheque a quantia de %-52s |", words);
+    String line6 = String.format("|              | a %-55s ou a sua ordem |", name);
+    String line7 = String.format("|              | BANCO                          Blumenau, %-32s|", date);
+    String line8 = "|              | AGENCIA                                                                  |";
+    String line9 = String.format("|              |                                            ASSINATURA %-19s|",
+        sign);
+    String line10 = "|:---------------------------------------------------------------------------------------:|";
 
-    System.out.println(linha1);
-    System.out.println(linha2);
-    System.out.println(linha3);
-    System.out.println(linha4);
-    System.out.println(linha5);
-    System.out.println(linha6);
-    System.out.println(linha7);
-    System.out.println(linha8);
-    System.out.println(linha9);
-    System.out.println(linha10);
+    System.out.println(line1);
+    System.out.println(line2);
+    System.out.println(line3);
+    System.out.println(line4);
+    System.out.println(line5);
+    System.out.println(line6);
+    System.out.println(line7);
+    System.out.println(line8);
+    System.out.println(line9);
+    System.out.println(line10);
   }
 
-  private static float entradaMontante() {
+  private static float inputValue() {
 
     while (true) {
       float floatInput = 0;
@@ -91,8 +91,7 @@ public class Main {
     }
   }
 
-  
-private static String extenso(float input) {
+  private static String valueWord(float input) {
     int i = 0;
     String inputNumber = String.format("%.2f", input);
     inputNumber = inputNumber.replace(",", "");
@@ -198,7 +197,7 @@ private static String extenso(float input) {
       }
     }
 
-    if (array[0] > 1 &&  array[1] != 0) {
+    if (array[0] > 1 && array[1] != 0) {
       finalString += "e ";
     }
 
@@ -252,18 +251,16 @@ private static String extenso(float input) {
     } else if (array[0] == 0 && array[1] != 0) {
       finalString += "reais ";
     }
-    
-    
-    if (array[0] ==0 && array[1] !=0 && array[2] != 0) {
-      finalString += "e ";
-    } else if (array[0] !=0 && array[1] ==0 && array[2] != 0) {
-      finalString += "e ";
-    } else if (array[0] !=0 && array[1] !=0 && array[2] != 0) {
-      finalString += "e ";
-    } 
 
+    if (array[0] == 0 && array[1] != 0 && array[2] != 0) {
+      finalString += "e ";
+    } else if (array[0] != 0 && array[1] == 0 && array[2] != 0) {
+      finalString += "e ";
+    } else if (array[0] != 0 && array[1] != 0 && array[2] != 0) {
+      finalString += "e ";
+    }
 
- //CENTAVOS
+    // CENTAVOS
     if (array[2] == 1) {
       switch (array[3]) {
         case 0:
@@ -349,19 +346,19 @@ private static String extenso(float input) {
       }
     }
 
-    if (array[0] ==0 && array[1] ==0 && array[2] > 1 && array[3] != 0){
+    if (array[0] == 0 && array[1] == 0 && array[2] > 1 && array[3] != 0) {
       finalString += "e ";
-    } else if (array[0] ==0 && array[1] !=0 && array[2] ==0 && array[3] != 0){
+    } else if (array[0] == 0 && array[1] != 0 && array[2] == 0 && array[3] != 0) {
       finalString += "e ";
-    } else if (array[0] ==0 && array[1] !=0 && array[2] > 1 && array[3] != 0){
+    } else if (array[0] == 0 && array[1] != 0 && array[2] > 1 && array[3] != 0) {
       finalString += "e ";
-    } else if (array[0] !=0 && array[1] ==0 && array[2] ==0 && array[3] != 0){
+    } else if (array[0] != 0 && array[1] == 0 && array[2] == 0 && array[3] != 0) {
       finalString += "e ";
-    } else if (array[0] !=0 && array[1] ==0 && array[2] >1 && array[3] != 0){
+    } else if (array[0] != 0 && array[1] == 0 && array[2] > 1 && array[3] != 0) {
       finalString += "e ";
-    } else if (array[0] !=0 && array[1] !=0 && array[2] ==0 && array[3] != 0){
+    } else if (array[0] != 0 && array[1] != 0 && array[2] == 0 && array[3] != 0) {
       finalString += "e ";
-    } else if (array[0] !=0 && array[1] !=0 && array[2] > 1 && array[3] != 0){
+    } else if (array[0] != 0 && array[1] != 0 && array[2] > 1 && array[3] != 0) {
       finalString += "e ";
     }
 
@@ -421,8 +418,7 @@ private static String extenso(float input) {
     Scanner scanner = new Scanner(System.in);
 
     System.out.println("Digite seu nome completo: ");
-    String nome = scanner.nextLine
-    ().trim();
+    String nome = scanner.nextLine().trim();
 
     if (!nome.matches("[a-zA-Z ?]+") || nome.split("\\s+").length < 2 || nome.length() > 55) {
       System.out.println("Erro! Digite um nome valido.");
